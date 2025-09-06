@@ -1,5 +1,6 @@
 import express from 'express';
 import { WebSocketServer } from 'ws';
+import { readFile, writeFile } from 'node:fs';
 
 // Start app.
 const app = express()
@@ -20,7 +21,14 @@ const wss = new WebSocketServer({ server });
 
 wss.on('connection', function connection(ws) {
     console.log('A new client has connected.');
-    // @todo read in chat history and send to client.
+    // Read in chat history and send to client.
+    readFile('log.txt', (err, data) => {
+        if (err) {
+            console.log('Log file does not exist.');
+            return;
+        }
+        console.log(data);
+    }); 
     ws.on('error', console.error);
 
     // Triggered when server receives message from client.
