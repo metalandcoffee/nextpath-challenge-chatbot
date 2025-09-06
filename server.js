@@ -2,19 +2,19 @@ import express from 'express';
 import { WebSocketServer } from 'ws';
 
 // Start HTTP server and listen on port 3000.
-const app = express()
+const server = express()
 const port = 3000
 
-app.get('/', (req, res) => {
+server.get('/', (req, res) => {
   res.send('Hello World! It\'s Metal & Coffee!')
 })
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
 // Create WebSocket using same HTTP server.
-const wss = new WebSocketServer({ server: app });
+const wss = new WebSocketServer({ server });
 
 wss.on('connection', function connection(ws) {
     console.log('A new client has connected.');
