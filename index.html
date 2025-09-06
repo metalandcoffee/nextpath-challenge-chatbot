@@ -6,7 +6,17 @@
     <title>Chatbot</title>
 </head>
 <body>
-    Chatbot
+    <h1>Chatbox</h1>
+    <div>
+        <ul>
+            <li>Message 1</li>
+            <li>Message 2</li>
+        </ul>
+    </div>
+    <div>
+        <input type="text">
+        <button onclick="sendMessage()">Send</button>
+    </div>
 </body>
 <script>
     // Create WebSocket connection.
@@ -17,9 +27,14 @@
         console.log('connected to WS server');
     });
 
-    // Listen for messages
+    // Listen for messages.
     socket.addEventListener("message", (event) => {
         console.log("Message from server ", event.data);
     });
+
+    const sendMessage = () => {
+        console.log('hi🧁');
+        // @todo read text from input. send to server.
+    }
 </script>
 </html>

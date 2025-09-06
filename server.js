@@ -1,16 +1,18 @@
 import express from 'express';
 import { WebSocketServer } from 'ws';
 
-// Start HTTP server and listen on port 3000.
-const server = express()
+// Start app.
+const app = express()
 const port = 3000
 
-server.get('/', (req, res) => {
-  res.send('Hello World! It\'s Metal & Coffee!')
+app.get('/', (req, res) => {
+    res.send('Hello World! It\'s Metal & Coffee!')
 })
 
-server.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+// Express handles creating HTTP server when binding
+// and listening for connections.
+const server = app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
 })
 
 // Create WebSocket using same HTTP server.
@@ -18,12 +20,14 @@ const wss = new WebSocketServer({ server });
 
 wss.on('connection', function connection(ws) {
     console.log('A new client has connected.');
-  ws.on('error', console.error);
+    // @todo read in chat history and send to client.
+    ws.on('error', console.error);
 
-  // Triggered when server receives message from client.
-  ws.on('message', function message(data) {
-    console.log('received: %s', data);
-  });
+    // Triggered when server receives message from client.
+    ws.on('message', function message(data) {
+        console.log('received: %s', data);
+        // @todo read in file. append with timestamp. write to file.
+    });
 
-//   ws.send('something');
+//   ws.send('Acknowledged!');
 });
