@@ -8,33 +8,58 @@
 <body>
     <h1>Chatbox</h1>
     <div>
-        <ul>
-            <li>Message 1</li>
-            <li>Message 2</li>
-        </ul>
+        <ul id="chat"></ul>
     </div>
-    <div>
+    <form id="newText">
         <input id="message" type="text">
-        <button onclick="sendMessage()">Send</button>
-    </div>
+        <button type="submit">Send</button>
+    </form>
 </body>
 <script>
     // Create WebSocket connection.
     const socket = new WebSocket("ws://localhost:3000");
+    const chat = document.getElementById('chat');
+    const form = document.getElementById('newText');
 
-    // Connection opened
+    // Connection opened.
     socket.addEventListener('open', (event) => {
         console.log('connected to WS server');
     });
 
-    // Listen for messages.
-    socket.addEventListener("message", (event) => {
-        console.log("Message from server ", event.data);
+    // Listen for messages and update chat.
+    socket.addEventListener('message', (event) => {
+        const received = JSON.parse(event.data);
+        if (Array.isArray(received)) {
+            restoreMessages(JSON.parse(event.data));
+        } else {
+            addMessage(received.user, received.text);
+        }
     });
 
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        sendMessage();
+    })
+
+    // Handle new message.
     const sendMessage = () => {
-        const message = document.getElementById('message').value;
-        socket.send(message);
+        const input = document.getElementById('message');
+        const message = input.value;
+        if (!message) return;
+        addMessage('human', message);
+        socket.send(JSON.stringify({user: 'human', text: message }));
+        input.value = '';
+    }
+    
+    const restoreMessages = (messages) => {
+        messages.forEach(message => {
+            message = JSON.parse(message);
+            addMessage(message.user, message.text);
+        });
+    }
+
+    const addMessage = (className, text) => {
+        chat.innerHTML += '<li class="' + className + '">' + text + '</li>';
     }
 </script>
 </html>
