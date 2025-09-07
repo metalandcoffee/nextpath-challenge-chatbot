@@ -1,6 +1,6 @@
-# Project Name
+# Metal & Coffee's Custom Chatbot
 
-Brief description of what your project does.
+A simple chatbot that acknowledges every message that the user sends. This project demonstrates successful usage of a WebSocket server.
 
 ## Getting Started
 
@@ -40,7 +40,11 @@ Follow these steps to get the project running locally:
 
 ## Usage
 
-Add information about how to use your project here.
+1. Make sure the Node server is running (`npm start`)
+2. Open `index.html` in your browser
+3. Type messages in the chat interface
+4. The bot will acknowledge each message you send
+5. Enjoy the simple WebSocket communication demo!
 
 ## Contributing
 
