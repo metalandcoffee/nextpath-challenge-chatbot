@@ -1,0 +1,65 @@
+:root {
+    --main-font-color: white;
+    --main-bg-color: black;
+    --main-chat-color: #278EFF;
+    --secondary-chat-color: #26252A;
+}
+
+body {
+    font-family: "SF Compact Display", system-ui, sans-serif;
+    color: var(--main-font-color);
+    background-color: var(--main-bg-color);
+    max-height: 26rem;
+    max-width: 20rem;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    padding-left: 1rem;
+    display: grid;
+}
+
+li {
+    margin-bottom: 1rem;
+}
+
+li.human {
+    justify-self: end;
+}
+
+li.human > span {
+    background-color: var(--secondary-chat-color);
+}
+
+/* Will try to incorporate this another time */
+/* 
+li.bot span:before {
+    content: "";
+    background-image: url(bot-chat-bubble.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+
+} */
+
+li > span {
+    display: inline-block;
+    background-color: var(--main-chat-color);
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+
+input {
+    width: 100%;
+    font-family: "SF Compact Display", system-ui, sans-serif;
+    color: var(--main-font-color);
+    background-color: transparent;
+    border: 1px grey solid;
+    padding: 0.5rem;
+    border-radius: 10px;
+    font-size: 16px;
+}

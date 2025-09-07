@@ -2,6 +2,8 @@
 
 A simple chatbot that acknowledges every message that the user sends. This project demonstrates successful usage of a WebSocket server.
 
+![image info](screenshot.png)
+
 ## Getting Started
 
 Follow these steps to get the project running locally:
